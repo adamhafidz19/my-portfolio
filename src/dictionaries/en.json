@@ -1,0 +1,32 @@
+{
+  "navbar": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "activity": "Credentials",
+    "contact": "Contact",
+    "menu": "Open navigation",
+    "close": "Close navigation"
+  },
+  "sections": {
+    "about": "Engineering with purpose",
+    "experience": "Experience",
+    "education": "Education",
+    "skills": "A practical, modern toolkit",
+    "projects": "Public digital work",
+    "activity": "Credentials & recognition",
+    "contact": "Let's create useful software"
+  },
+  "ui": {
+    "viewProject": "View project",
+    "viewSource": "Source code",
+    "present": "Present",
+    "getInTouch": "Start a conversation",
+    "downloadResume": "View resume",
+    "callMe": "Call me",
+    "switchLanguage": "Tukar ke Bahasa Melayu",
+    "toggleTheme": "Toggle color theme",
+    "available": "Open to frontend opportunities",
+    "projectContribution": "Key contribution"
+  }
+}

@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  --font-display: "Iowan Old Style", Baskerville, "Times New Roman", serif;
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+  --color-primary-50: #fdf2f7;
+  --color-primary-100: #fce7f0;
+  --color-primary-200: #f9cfe0;
+  --color-primary-300: #f4a5c3;
+  --color-primary-400: #ec6f9e;
+  --color-primary-500: #dc3978;
+  --color-primary-600: #c2185b;
+  --color-primary-700: #a6124b;
+  --color-primary-800: #89123f;
+  --color-primary-900: #721438;
+  --color-primary-950: #45051e;
+  --shadow-glow: 0 0 40px rgba(194, 24, 91, 0.16);
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+:root {
+  --background: #fbf9fa;
+  --foreground: #1d1519;
+  --surface: rgba(255, 255, 255, 0.76);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --border: rgba(91, 52, 68, 0.16);
+  --muted: #6f6268;
+}
+
+.dark {
+  --background: #0b080a;
+  --foreground: #f5edf1;
+  --surface: rgba(21, 15, 18, 0.76);
+  --surface-strong: rgba(25, 18, 22, 0.94);
+  --border: rgba(255, 220, 235, 0.13);
+  --muted: #a89da2;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  background-image:
+    radial-gradient(circle at 82% 8%, rgba(194, 24, 91, 0.09), transparent 25rem),
+    radial-gradient(circle at 8% 48%, rgba(194, 24, 91, 0.05), transparent 22rem);
+}
+
+::selection {
+  background: #c2185b;
+  color: white;
+}
+
+@layer components {
+  .content-shell {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .section-shell {
+    @apply mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 sm:py-28 lg:px-10 lg:py-32;
+  }
+
+  .glass-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    @apply rounded-3xl backdrop-blur-xl;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[0.68rem] font-bold uppercase tracking-[0.24em] text-primary-600;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
