@@ -6,10 +6,15 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Adam Hafidz | Frontend Software Engineer",
+    default: "Adam Hafidz e-Portfolio",
     template: "%s | Adam Hafidz",
   },
-  description: "Frontend Software Engineer building accessible public digital services with React, Next.js, TypeScript, and Tailwind CSS.",
+  icons: {
+    icon: "/title-logo.png",
+    shortcut: "/title-logo.png",
+    apple: "/title-logo.png",
+  },
+  description: "Software Engineer building accessible public digital services with React, Next.js, TypeScript, and Tailwind CSS.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

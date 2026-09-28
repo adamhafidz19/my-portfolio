@@ -3,7 +3,6 @@
     "about": "About",
     "skills": "Skills",
     "projects": "Projects",
-    "activity": "Credentials",
     "contact": "Contact",
     "menu": "Open navigation",
     "close": "Close navigation"
@@ -14,7 +13,6 @@
     "education": "Education",
     "skills": "A practical, modern toolkit",
     "projects": "Public digital work",
-    "activity": "Credentials & recognition",
     "contact": "Let's create useful software"
   },
   "ui": {
