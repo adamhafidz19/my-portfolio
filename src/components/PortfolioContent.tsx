@@ -70,7 +70,7 @@ export function PortfolioContent({ dictionary }: { dictionary: Dictionary }) {
                   {/* Inner screen */}
                   <div className="relative size-full overflow-hidden rounded-[1.6rem] border border-white/5 bg-zinc-900">
                     <Image
-                      src="/profile-picture.jpeg"
+                      src="/images/profile-picture.jpeg"
                       alt={resumeData.personal.name}
                       fill
                       className="object-cover object-center"

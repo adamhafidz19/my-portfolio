@@ -29,6 +29,36 @@
   --color-primary-900: #721438;
   --color-primary-950: #45051e;
   --shadow-glow: 0 0 40px rgba(194, 24, 91, 0.16);
+
+  --animate-marquee-left: marquee-left 40s linear infinite;
+  --animate-marquee-right: marquee-right 40s linear infinite;
+  --animate-border-spin: border-spin 6s linear infinite;
+
+  @keyframes border-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  @keyframes marquee-left {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-right {
+    from {
+      transform: translateX(-50%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
 }
 
 @layer base {
@@ -81,7 +111,7 @@ body {
   }
 
   .section-shell {
-    @apply mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 sm:py-28 lg:px-10 lg:py-24;
+    @apply mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-24;
   }
 
   .glass-panel {

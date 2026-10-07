@@ -46,7 +46,7 @@ export function Navbar({
             {/* Bright neon border */}
             <div className="relative size-full rounded-xl bg-linear-to-br from-pink-300 via-fuchsia-900 to-primary-700 p-[1.5px] shadow-[0_0_10px_rgba(236,72,153,0.8),0_0_20px_rgba(217,70,239,0.45)]">
               <Image
-                src="/logo.jpg"
+                src="/images/logo.jpg"
                 alt={`${resumeData.personal.name} logo`}
                 width={40}
                 height={40}

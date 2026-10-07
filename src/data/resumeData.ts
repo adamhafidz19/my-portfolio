@@ -1,7 +1,10 @@
 export type Experience = {
   company: string;
+  logo?: string;
   role: string;
   type: string;
+  setup: string;
+  location?: string;
   period: string;
   summary: string;
   highlights: readonly string[];
@@ -32,9 +35,8 @@ export const resumeData = {
     intro:
       "Passionate about delivering clean, maintainable, and high-performance frontend solutions.",
     about: [
-      "I am a Frontend Software Engineer who turns complex requirements into clear, user-focused web applications with React, Next.js, TypeScript, and Tailwind CSS.",
-      "At GovTech Malaysia, I contribute to public-facing services used across government, translating Figma designs into reusable MYDS-compliant interfaces and integrating them with production APIs.",
-      "My background in computational physics gives me a structured, analytical approach to debugging and problem solving. I care about clean code, accessible systems, and products that work well for everyone.",
+      "I’m a motivated Software Engineer who enjoys building clear, user-friendly, and meaningful web applications. With a background in computational physics, I bring a structured and thoughtful approach to problem solving, with a strong focus on clean code, accessibility, and reliable user experiences.",
+      "I’m always learning, improving, and growing as a developer, while continuously exploring better ways to build useful and impactful digital products.",
     ],
     socials: {
       github: "https://github.com/adamhafidz19",
@@ -50,8 +52,11 @@ export const resumeData = {
   experience: [
     {
       company: "GovTech Malaysia",
+      logo: "/images/govtech-logo.png",
       role: "Software Engineer",
       type: "Full-time",
+      setup: "Hybrid",
+      location: "Putrajaya, Malaysia",
       period: "Aug 2025 - Present",
       summary:
         "Building and maintaining public-facing government platforms across design systems, frontend applications, APIs, and cloud delivery.",
@@ -61,12 +66,24 @@ export const resumeData = {
         "Integrated REST APIs and contributed to MVC standardization, automated API testing, technical spikes, and integration testing.",
         "Resolved cross-stack defects and collaborated through Scrum ceremonies, code reviews, Git workflows, testing, and AWS deployments.",
       ],
-      technologies: ["TypeScript", "React", "Next.js", "Fastify", "ElysiaJS", "Laravel", "MongoDB", "Docker", "AWS"],
+      technologies: [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Fastify",
+        "ElysiaJS",
+        "Laravel",
+        "MongoDB",
+        "Docker",
+        "AWS",
+      ],
     },
     {
       company: "Hallucinations Digital",
-      role: "Freelance Frontend Developer",
+      // logo: "/images/hallucinations-logo.png",
+      role: "Frontend Developer",
       type: "Freelance",
+      setup: "Remote",
       period: "Jun 2026 - Present",
       summary:
         "Developing the Super Admin experience for Guardina Web in collaboration with product designers and backend engineers.",
@@ -79,8 +96,11 @@ export const resumeData = {
     },
     {
       company: "Avialite Sdn Bhd",
+      logo: "/images/avialite-logo.png",
       role: "Embedded Software Engineer",
       type: "Full-time",
+      setup: "On-site",
+      location: "Kuala Terengganu, Malaysia",
       period: "Jan 2025 - Jul 2025",
       summary:
         "Supported research and development for dependable microcontroller-based aviation lighting products.",
@@ -94,48 +114,93 @@ export const resumeData = {
   ] satisfies Experience[],
   education: [
     {
+      logo: "/images/iium-logo.png",
       institution: "International Islamic University Malaysia (IIUM)",
-      qualification: "B.Sc. Physics - Computational Physics (Honours)",
-      period: "Oct 2020 - Aug 2024",
+      qualification: "Bachelor of Science (Physics)(Honours)",
+      period: "2020 - 2024",
       cgpa: "3.94 / 4.00",
-      achievements: [
+      details: [
         "Best Student (Overall), Kulliyyah of Science",
         "Final Year Project: Development and Application of High-Resolution CNN in UAV Detection",
       ],
     },
     {
+      logo: "/images/iium-logo.png",
       institution: "Centre for Foundation Studies, IIUM",
       qualification: "Foundation in Physical Science",
-      period: "Jun 2019 - Jul 2020",
+      period: "2019 - 2020",
       cgpa: "3.98 / 4.00",
-      achievements: [],
+      details: [],
     },
   ],
   skillGroups: [
     {
       group: "Frontend engineering",
       description: "Interfaces, component systems, and responsive experiences",
-      items: ["TypeScript", "JavaScript", "React.js", "Next.js", "HTML", "CSS", "Tailwind CSS", "Accessibility"],
+      items: [
+        "TypeScript",
+        "JavaScript",
+        "React.js",
+        "Next.js",
+        "HTML",
+        "CSS",
+        "Tailwind CSS",
+        "Accessibility",
+      ],
     },
     {
       group: "Backend & data",
       description: "API integration and supporting application services",
-      items: ["REST APIs", "Fastify", "ElysiaJS", "Laravel", "Node.js (basic)", "PHP (basic)", "MongoDB", "MySQL"],
+      items: [
+        "REST APIs",
+        "Fastify",
+        "ElysiaJS",
+        "Laravel",
+        "Node.js (basic)",
+        "PHP (basic)",
+        "MongoDB",
+        "MySQL",
+      ],
     },
     {
       group: "Delivery & tools",
       description: "The workflow behind stable production software",
-      items: ["Git", "GitHub", "Docker", "Postman", "AWS (basic)", "Proxmox VE", "Jira", "Figma", "Linux"],
+      items: [
+        "Git",
+        "GitHub",
+        "Docker",
+        "Postman",
+        "AWS (basic)",
+        "Proxmox VE",
+        "Jira",
+        "Figma",
+        "Linux",
+      ],
     },
     {
       group: "Systems & languages",
       description: "Foundations from embedded systems and scientific work",
-      items: ["C", "C++", "Python (basic)", "Arduino IDE", "STM32CubeIDE", "Embedded systems"],
+      items: [
+        "C",
+        "C++",
+        "Python (basic)",
+        "Arduino IDE",
+        "STM32CubeIDE",
+        "Embedded systems",
+      ],
     },
     {
       group: "Standards & practice",
       description: "Consistent systems built around users and requirements",
-      items: ["MYDS", "Design systems", "Figma handoff", "Agile / Scrum", "API testing", "Integration testing", "BRS alignment"],
+      items: [
+        "MYDS",
+        "Design systems",
+        "Figma handoff",
+        "Agile / Scrum",
+        "API testing",
+        "Integration testing",
+        "BRS alignment",
+      ],
     },
   ],
   projects: [

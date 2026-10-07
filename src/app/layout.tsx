@@ -6,13 +6,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Adam Hafidz e-Portfolio",
+    default: "Adam Hafidz",
     template: "%s | Adam Hafidz",
   },
   icons: {
-    icon: "/title-logo.png",
-    shortcut: "/title-logo.png",
-    apple: "/title-logo.png",
+    icon: "/images/title-logo.png",
+    shortcut: "/images/title-logo.png",
+    apple: "/images/title-logo.png",
   },
   description: "Software Engineer building accessible public digital services with React, Next.js, TypeScript, and Tailwind CSS.",
 };

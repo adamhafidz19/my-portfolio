@@ -1,37 +1,176 @@
-import { Check, Code2 } from "lucide-react";
+import Image from "next/image";
+import { Briefcase, Building2, MapPin } from "lucide-react";
 import { resumeData } from "@/data/resumeData";
-import { Tag } from "@/components/ui/Tag";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Experience({ heading }: { heading: string }) {
   return (
-    <div className="mt-20 border-t border-black/10 pt-12 dark:border-white/10">
-      <div className="mb-10 flex items-center justify-between gap-5">
-        <h3 className="font-display text-3xl text-zinc-950 sm:text-4xl dark:text-white">{heading}</h3>
-        <Code2 className="text-primary-600" size={24} />
+    <div className="mt-10 pt-12">
+      <div className="flex items-center justify-center">
+        <SectionHeading title={heading} />
       </div>
-      <div className="space-y-5">
-        {resumeData.experience.map((item, index) => (
-          <article key={`${item.company}-${item.role}`} className="glass-panel group grid overflow-hidden lg:grid-cols-[15rem_1fr]">
-            <div className="border-b border-black/10 bg-white/35 p-6 lg:border-b-0 lg:border-r lg:p-8 dark:border-white/10 dark:bg-white/[0.025]">
-              <p className="font-mono text-[0.62rem] font-bold uppercase tracking-[0.22em] text-primary-600">0{index + 1} / {item.type}</p>
-              <h4 className="mt-6 text-xl font-bold text-zinc-950 dark:text-white">{item.company}</h4>
-              <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{item.role}</p>
-              <p className="mt-6 font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-zinc-500">{item.period}</p>
-            </div>
-            <div className="p-6 lg:p-8">
-              <p className="max-w-3xl text-pretty text-lg leading-8 text-zinc-700 dark:text-zinc-200">{item.summary}</p>
-              <ul className="mt-6 grid gap-3 xl:grid-cols-2">
-                {item.highlights.map((highlight) => (
-                  <li key={highlight} className="flex gap-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                    <Check size={16} className="mt-1 shrink-0 text-primary-600" />
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-7 flex flex-wrap gap-2">{item.technologies.map((technology) => <Tag key={technology}>{technology}</Tag>)}</div>
-            </div>
-          </article>
-        ))}
+
+      <div className="relative mx-auto w-full max-w-5xl">
+        {/* Central rail (desktop) */}
+        <div
+          aria-hidden="true"
+          className="absolute top-2 bottom-2 left-1/2 hidden w-px -translate-x-1/2 bg-linear-to-b from-transparent via-primary-500 to-transparent sm:block dark:via-primary-600"
+        />
+        {/* Left rail (mobile) */}
+        <div
+          aria-hidden="true"
+          className="absolute top-2 bottom-2 left-5 w-px bg-linear-to-b from-transparent via-primary-500 to-transparent sm:hidden dark:via-primary-600"
+        />
+
+        <ol className="flex flex-col gap-6 sm:gap-12">
+          {resumeData.experience.map((item, index) => {
+            const isEven = index % 2 === 0;
+            // const isPresent = item.period.toLowerCase().includes("present");
+
+            return (
+              <li
+                key={`${item.company}-${item.role}-${item.period}`}
+                className={`group relative flex w-full items-start ${
+                  isEven ? "sm:flex-row" : "sm:flex-row-reverse"
+                }`}
+              >
+                {/* Timeline node — desktop */}
+                <div
+                  aria-hidden="true"
+                  className="absolute top-8 left-1/2 hidden h-8 w-8 -translate-x-1/2 items-center justify-center sm:flex"
+                >
+                  <div className="size-3 rounded-full bg-primary-600 ring-4 ring-white transition-all duration-300 group-hover:scale-125 group-hover:bg-primary-500 group-hover:ring-primary-600/20 dark:ring-[#0b080a] dark:group-hover:ring-primary-600/20" />
+                </div>
+
+                {/* Timeline node — mobile */}
+                <div
+                  aria-hidden="true"
+                  className="absolute top-8 left-5 flex h-8 w-8 -translate-x-1/2 items-center justify-center sm:hidden"
+                >
+                  <div className="size-3 rounded-full bg-primary-600 ring-4 ring-white transition-all duration-300 group-hover:scale-125 group-hover:bg-primary-500 group-hover:ring-primary-600/20 dark:ring-[#0b080a] dark:group-hover:ring-primary-600/20" />
+                </div>
+
+                {/* Spacer (forces alternating layout on desktop) */}
+                <div aria-hidden="true" className="hidden w-1/2 sm:block" />
+
+                {/* Card column */}
+                <div
+                  className={`relative w-full pl-11 sm:w-1/2 sm:pl-0 ${
+                    isEven ? "sm:pl-14" : "sm:pr-14"
+                  }`}
+                >
+                  {/* Dotted connector — desktop */}
+                  <div
+                    aria-hidden="true"
+                    className={`absolute -z-10 top-12 hidden w-14 -translate-y-1/2 border-t-2 border-dotted border-zinc-300 transition-colors duration-300 group-hover:border-primary-500/60 sm:block dark:border-zinc-700 ${
+                      isEven ? "left-0" : "right-0"
+                    }`}
+                  />
+                  {/* Dotted connector — mobile */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute -z-10 top-12 left-5 w-8 -translate-y-1/2 border-t-2 border-dotted border-zinc-300 transition-colors duration-300 group-hover:border-primary-500/60 sm:hidden dark:border-zinc-700"
+                  />
+
+                  <article className="glass-panel relative w-full p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow sm:p-6">
+                    <div className="flex sm:flex-col-reverse md:flex-row sm:items-center md:items-start justify-between gap-4 ">
+                      <div className="min-w-0">
+                        <div className="mb-1 flex flex-wrap items-center sm:justify-center md:justify-start gap-2 ">
+                          <time className="flex font-mono sm:text-center md:text-left text-xs font-bold tracking-[0.22em] text-zinc-500 uppercase dark:text-zinc-400">
+                            {item.period}
+                          </time>
+                          {/* {isPresent && (
+                            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary-600/25 bg-primary-600/10 px-2 py-0.5 font-mono text-[0.6rem] font-bold tracking-widest text-primary-700 uppercase dark:text-primary-300">
+                              <span className="size-1.5 rounded-full bg-primary-600" />
+                              Present
+                            </span>
+                          )} */}
+                        </div>
+                        <h4 className="text-xl leading-tight font-bold text-zinc-950 sm:text-xl dark:text-white sm:text-center md:text-left">
+                          {item.role}
+                        </h4>
+                        <p className="mt-1 text-sm font-semibold text-primary-600 dark:text-primary-400 sm:text-center md:text-left">
+                          {item.company}
+                        </p>
+                      </div>
+
+                      <div className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-black/5 bg-white p-1.5 shadow-sm sm:size-14 dark:border-white/10 dark:bg-zinc-900">
+                        {item.logo ? (
+                          <Image
+                            src={item.logo}
+                            alt={`${item.company} logo`}
+                            width={56}
+                            height={56}
+                            loading="lazy"
+                            className="h-full w-full object-contain"
+                            unoptimized
+                          />
+                        ) : (
+                          <Building2 className="size-6 text-zinc-400" />
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="mt-3 flex flex-wrap items-center sm:justify-center md:justify-start gap-x-2 gap-y-1.5 font-mono text-xs font-semibold tracking-wider text-zinc-500 uppercase dark:text-zinc-400">
+                      <span className="inline-flex items-center gap-1">
+                        <Briefcase
+                          size={13}
+                          className="text-primary-600 shrink-0"
+                        />
+                        {item.type} · {item.setup}
+                      </span>
+                      {item.location && (
+                        <span className="inline-flex items-center gap-1">
+                          <MapPin
+                            size={13}
+                            className="text-primary-600 shrink-0"
+                          />
+                          {item.location}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* <p className="mt-3 text-sm leading-6 text-pretty text-zinc-600 dark:text-zinc-300">
+                      {item.summary}
+                    </p> */}
+
+                    {/* <div className="mt-4 flex flex-wrap gap-2">
+                      {item.technologies.map((tech) => (
+                        <Tag key={tech}>{tech}</Tag>
+                      ))}
+                    </div> */}
+
+                    {/* {item.highlights.length > 0 && (
+                      <details className="group/details mt-4 border-t border-black/10 pt-4 dark:border-white/10">
+                        <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-zinc-700 transition-colors hover:text-primary-600 dark:text-zinc-300 dark:hover:text-primary-400 [&::-webkit-details-marker]:hidden">
+                          <ChevronDown
+                            size={16}
+                            className="shrink-0 text-primary-600 transition-transform duration-300 group-open/details:rotate-180"
+                          />
+                          Key contributions ({item.highlights.length})
+                        </summary>
+                        <ul className="mt-3 space-y-2.5">
+                          {item.highlights.map((point) => (
+                            <li
+                              key={point}
+                              className="flex gap-2.5 text-sm leading-6 text-zinc-600 dark:text-zinc-400"
+                            >
+                              <Check
+                                size={15}
+                                className="mt-1 shrink-0 text-primary-600"
+                              />
+                              <span>{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    )} */}
+                  </article>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </div>
   );
