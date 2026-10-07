@@ -1,7 +1,13 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { SiteFrame } from "@/components/layout/SiteFrame";
-import { getDictionary, isLocale } from "@/dictionaries";
+import { getDictionary, isLocale, locales } from "@/dictionaries";
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 export default async function LocaleLayout({
   children,
@@ -15,5 +21,9 @@ export default async function LocaleLayout({
 
   const dictionary = getDictionary(locale);
 
-  return <SiteFrame locale={locale} dictionary={dictionary}>{children}</SiteFrame>;
+  return (
+    <SiteFrame locale={locale} dictionary={dictionary}>
+      {children}
+    </SiteFrame>
+  );
 }

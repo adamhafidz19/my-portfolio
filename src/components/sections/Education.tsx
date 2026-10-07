@@ -38,6 +38,7 @@ function EducationCard({ item }: { item: EducationItem }) {
             width={80}
             height={80}
             className="h-full w-full object-contain p-2"
+            unoptimized
           />
         ) : (
           <Building2 className="h-8 w-8 text-zinc-400" />
@@ -86,6 +87,7 @@ function EducationCard({ item }: { item: EducationItem }) {
               width={64}
               height={64}
               className="h-full w-full object-contain p-1.5"
+              unoptimized
             />
           ) : (
             <Building2 className="h-6 w-6 text-zinc-400" />
