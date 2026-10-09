@@ -13,12 +13,24 @@ export type Experience = {
 
 export type Project = {
   title: string;
+  image: string;
   fullName: string;
   category: string;
   description: string;
   contributions: readonly string[];
-  tags: readonly string[];
+  technologies: readonly string[];
+  github?: string;
+  liveUrl?: string;
   featured?: boolean;
+};
+
+export type Education = {
+  logo?: string;
+  institution: string;
+  qualification: string;
+  period: string;
+  cgpa: string;
+  details?: readonly string[];
 };
 
 export const resumeData = {
@@ -130,9 +142,8 @@ export const resumeData = {
       qualification: "Foundation in Physical Science",
       period: "2019 - 2020",
       cgpa: "3.98 / 4.00",
-      details: [],
     },
-  ],
+  ] satisfies Education[],
   skillGroups: [
     {
       group: "Frontend engineering",
@@ -206,6 +217,7 @@ export const resumeData = {
   projects: [
     {
       title: "GovSuite DMS",
+      image: "/images/projects/govsuitedms.png",
       fullName: "Government Document Management System",
       category: "Backend & integration",
       description:
@@ -214,24 +226,20 @@ export const resumeData = {
         "Developed RESTful APIs and MongoDB models for documents, folders, search, and system integrations.",
         "Improved search and data retrieval while connecting services with frontend applications, RabbitMQ, and processing systems.",
       ],
-      tags: ["MongoDB", "REST APIs", "RabbitMQ", "System integration"],
-      featured: true,
-    },
-    {
-      title: "MYDS",
-      fullName: "Malaysia Government Design System",
-      category: "Design system",
-      description:
-        "A shared foundation for accessible, consistent, and recognizably Malaysian government digital services.",
-      contributions: [
-        "Developed and enhanced reusable UI components aligned with MYDS standards.",
-        "Standardized components against SPLaSK policies and documented patterns for internal adoption.",
+      technologies: [
+        "ElysiaJS",
+        "ReactJS",
+        "MYDS",
+        "MongoDB",
+        "REST APIs",
+        "RabbitMQ",
+        "Garage",
       ],
-      tags: ["React", "Tailwind CSS", "Accessibility", "Documentation"],
       featured: true,
     },
     {
       title: "RDMKD",
+      image: "/images/projects/rdmkd.png",
       fullName: "Repositori Data dan Maklumat Kementerian Digital",
       category: "Frontend engineering",
       description:
@@ -240,10 +248,27 @@ export const resumeData = {
         "Resolved UI and functional issues against Figma designs and Business Requirement Specifications.",
         "Refined responsive layouts, component consistency, and interaction behavior.",
       ],
-      tags: ["React", "MYDS", "Figma", "Quality assurance"],
+      technologies: ["ReactJS", "MYDS", "Figma", "Quality assurance"],
+    },
+    {
+      title: "MYDS",
+      image: "/images/projects/myds.png",
+      fullName: "Malaysia Government Design System",
+      category: "Design system",
+      description:
+        "A shared foundation for accessible, consistent, and recognizably Malaysian government digital services.",
+      contributions: [
+        "Developed and enhanced reusable UI components aligned with MYDS standards.",
+        "Standardized components against SPLaSK policies and documented patterns for internal adoption.",
+      ],
+      technologies: ["React", "Tailwind CSS", "Accessibility", "Documentation"],
+      github: "https://github.com/govtechmy/myds",
+      liveUrl: "https://design.digital.gov.my",
+      featured: true,
     },
     {
       title: "Sekolahku",
+      image: "/images/projects/sekolahku.png",
       fullName: "National School Information System",
       category: "Full-stack platform",
       description:
@@ -252,10 +277,13 @@ export const resumeData = {
         "Implemented API-driven React interfaces from Figma specifications.",
         "Fixed functional and interface defects to strengthen user flows and system reliability.",
       ],
-      tags: ["React", "Fastify", "Headless CMS", "REST APIs"],
+      technologies: ["ReactJS", "MYDS", "Fastify", "Payload CMS"],
+      github: "https://github.com/govtechmy/sekolahku-fe",
+      liveUrl: "https://sekolahku.digital.gov.my",
     },
     {
       title: "MyFaSA",
+      image: "/images/projects/myfasa.png",
       fullName: "Public Sector Facility Booking System",
       category: "Administrative platform",
       description:
@@ -264,7 +292,7 @@ export const resumeData = {
         "Built responsive Laravel Blade dashboard pages and components from Figma designs.",
         "Connected views to controllers and collaborated on facility approval workflows.",
       ],
-      tags: ["Laravel", "Blade", "Responsive UI", "Admin workflows"],
+      technologies: ["Laravel", "PHP"],
     },
   ] satisfies Project[],
   // credentials: [

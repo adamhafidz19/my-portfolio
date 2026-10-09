@@ -111,7 +111,7 @@ export function Experience({ heading }: { heading: string }) {
                       </div>
                     </div>
 
-                    <div className="mt-3 flex flex-wrap items-center sm:justify-center md:justify-start gap-x-2 gap-y-1.5 font-mono text-xs font-semibold tracking-wider text-zinc-500 uppercase dark:text-zinc-400">
+                    <div className="mt-3 flex flex-wrap items-center justify-start gap-x-2 gap-y-1.5 font-mono text-xs font-semibold tracking-wider text-zinc-500 uppercase dark:text-zinc-400">
                       <span className="inline-flex items-center gap-1">
                         <Briefcase
                           size={13}

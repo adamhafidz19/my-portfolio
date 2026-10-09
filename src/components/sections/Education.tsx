@@ -8,21 +8,13 @@ import {
   Building2,
   CalendarDays,
 } from "lucide-react";
-import { resumeData } from "@/data/resumeData";
+import { resumeData, type Education } from "@/data/resumeData";
 import { SectionHeading } from "../ui/SectionHeading";
 
-type EducationItem = {
-  logo?: string;
-  institution: string;
-  qualification: string;
-  period: string;
-  cgpa: string;
-  details: readonly string[];
-};
-
-function EducationCard({ item }: { item: EducationItem }) {
+function EducationCard({ item }: { item: Education }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const hasDetails = item.details && item.details.length > 0;
+  const details = item.details ?? [];
+  const hasDetails = details.length > 0;
 
   return (
     <article className="relative mt-12 flex flex-col rounded-3xl border-2 border-black/10 bg-linear-to-r from-white via-primary-50/70 to-primary-100/60 p-6 shadow-lg transition-colors duration-300 hover:border-primary-600/30 hover:shadow-glow md:mt-0 dark:border-white/10 dark:from-primary-500/15 dark:via-[#150f12] dark:to-[#150f12] dark:hover:border-primary-500/30">
@@ -101,7 +93,7 @@ function EducationCard({ item }: { item: EducationItem }) {
         {/* Action Bar / Toggle */}
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-            {hasDetails ? `${item.details.length} Details` : "No Details"}
+            {hasDetails ? `${details.length} Details` : "No Details"}
           </span>
 
           <div className="flex gap-2">
@@ -128,7 +120,7 @@ function EducationCard({ item }: { item: EducationItem }) {
           >
             <div className="overflow-hidden">
               <ul className="space-y-3.5 text-sm leading-relaxed text-zinc-600 text-left dark:text-zinc-300">
-                {item.details.map((detail, i) => (
+                {details.map((detail, i) => (
                   <li key={i} className="flex items-start gap-3">
                     {/* Glowing green dot style matching the screenshot */}
                     <span className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary-600 shadow-[0_0_8px_rgba(194,24,91,0.4)] dark:bg-primary-500" />
@@ -151,7 +143,7 @@ export function Education({ heading }: { heading: string }) {
         <SectionHeading title={heading} />
       </div>
 
-      <div className="grid grid-cols-1 items-start gap-y-16 gap-x-6 lg:grid-cols-2 md:gap-y-6 lg:gap-x-8">
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
         {resumeData.education.map((item, index) => (
           <EducationCard key={`${item.institution}-${index}`} item={item} />
         ))}
