@@ -58,19 +58,21 @@ export function About({ dictionary }: { dictionary: Dictionary }) {
               {dictionary.navbar.skills}
             </h3>
 
-            <div className="relative overflow-hidden sm:space-y-3">
-              {/* fade edges */}
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-linear-to-r from-(--background) to-transparent sm:w-16" />
+            <div className="relative overflow-hidden">
+              {/* Fade edges */}
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 h-full w-8 bg-linear-to-r from-(--background) to-transparent sm:w-16" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 h-full w-8 bg-linear-to-l from-(--background) to-transparent sm:w-16" />
 
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-linear-to-l from-(--background) to-transparent sm:w-16" />
-
-              {skillRows.map((row, index) => (
-                <SkillMarquee
-                  key={index}
-                  skills={row}
-                  direction={index === 0 ? "left" : "right"}
-                />
-              ))}
+              {/* Inner container handles the spacing between rows safely */}
+              <div className="space-y-3">
+                {skillRows.map((row, index) => (
+                  <SkillMarquee
+                    key={index}
+                    skills={row}
+                    direction={index === 0 ? "left" : "right"}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
