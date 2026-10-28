@@ -60,7 +60,7 @@ export function PortfolioContent({ dictionary }: { dictionary: Dictionary }) {
             <div className="flex w-full justify-center lg:w-1/2">
               <div className="relative w-full max-w-md lg:ml-auto lg:max-w-lg">
                 {/* Large soft magenta glow */}
-                <div className="absolute -inset-6 rounded-[3rem] bg-linear-to-br from-primary-500/25 via-primary-500/20 to-pink-500/10 blur-3xl" />
+                <div className="absolute -inset-4 rounded-[3rem] bg-linear-to-br from-primary-500/25 via-primary-500/20 to-pink-500/10 blur-3xl sm:-inset-6" />
 
                 {/* Slight secondary glow closer to frame */}
                 <div className="absolute -inset-2 0rounded-[2.6rem] bg-linear-to-br from-primary-400/30 via-primary-500/15 to-transparent blur-lg" />

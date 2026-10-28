@@ -38,7 +38,7 @@ export const resumeData = {
     name: "Adam Hafidz",
     fullName: "Muhammad Adam Hafidz",
     initials: "AH",
-    role: "Frontend Software Engineer",
+    role: "Software Engineer",
     location: "Kuala Lumpur, Malaysia",
     email: "hafidzadam777@gmail.com",
     phone: "012-734 7727",

@@ -14,7 +14,7 @@ export function SectionHeading({
         {words.map((word, index) => (
           <span
             key={`${word}-${index}`}
-            className={index === 1 ? "text-primary-600" : undefined}
+            className={index % 2 !== 0 ? "text-primary-600" : undefined}
           >
             {index > 0 && " "}
             {word}
