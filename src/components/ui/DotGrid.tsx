@@ -58,9 +58,19 @@ const fragment = /* glsl */ `
 
 function hexToRgb(hex: string): [number, number, number] {
   const value = hex.replace("#", "");
-  const normalized = value.length === 3 ? value.split("").map((char) => char + char).join("") : value;
+  const normalized =
+    value.length === 3
+      ? value
+          .split("")
+          .map((char) => char + char)
+          .join("")
+      : value;
   const number = Number.parseInt(normalized, 16);
-  return [((number >> 16) & 255) / 255, ((number >> 8) & 255) / 255, (number & 255) / 255];
+  return [
+    ((number >> 16) & 255) / 255,
+    ((number >> 8) & 255) / 255,
+    (number & 255) / 255,
+  ];
 }
 
 export function DotGrid({
@@ -78,7 +88,10 @@ export function DotGrid({
     const container = containerRef.current;
     if (!container) return;
 
-    const renderer = new Renderer({ alpha: true, dpr: Math.min(window.devicePixelRatio, 2) });
+    const renderer = new Renderer({
+      alpha: true,
+      dpr: Math.min(window.devicePixelRatio, 2),
+    });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
     gl.canvas.style.width = "100%";
@@ -89,6 +102,11 @@ export function DotGrid({
     const mouse = new Vec2(-10_000, -10_000);
     const clickOrigin = new Vec2(-10_000, -10_000);
     let clickedAt = -10;
+    let frame = 0;
+    const motionPreference = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    let reducedMotion = motionPreference.matches;
 
     const program = new Program(gl, {
       vertex,
@@ -102,49 +120,106 @@ export function DotGrid({
         uProximity: { value: proximity * dpr },
         uClickTime: { value: 10 },
         uClickOrigin: { value: clickOrigin },
-        uBaseColor: { value: hexToRgb(resolvedTheme === "dark" ? darkBaseColor : baseColor) },
+        uBaseColor: {
+          value: hexToRgb(resolvedTheme === "dark" ? darkBaseColor : baseColor),
+        },
         uActiveColor: { value: hexToRgb(activeColor) },
       },
     });
     const mesh = new Mesh(gl, { geometry: new Triangle(gl), program });
 
+    const render = () => {
+      frame = 0;
+      const elapsed = performance.now() / 1000 - clickedAt;
+      program.uniforms.uClickTime.value = reducedMotion ? 10 : elapsed;
+      renderer.render({ scene: mesh });
+
+      if (!reducedMotion && clickedAt >= 0 && elapsed < 1.1) {
+        frame = requestAnimationFrame(render);
+      }
+    };
+    const scheduleRender = () => {
+      if (!frame && !document.hidden) frame = requestAnimationFrame(render);
+    };
+
     const resize = () => {
       renderer.setSize(container.clientWidth, container.clientHeight);
       program.uniforms.uResolution.value.set(gl.canvas.width, gl.canvas.height);
+      scheduleRender();
     };
     const updatePointer = (event: PointerEvent, target: Vec2) => {
       const rect = container.getBoundingClientRect();
-      target.set((event.clientX - rect.left) * dpr, (rect.bottom - event.clientY) * dpr);
+      target.set(
+        (event.clientX - rect.left) * dpr,
+        (rect.bottom - event.clientY) * dpr,
+      );
     };
-    const onPointerMove = (event: PointerEvent) => updatePointer(event, mouse);
+    const onPointerMove = (event: PointerEvent) => {
+      if (reducedMotion || event.pointerType === "touch") return;
+      updatePointer(event, mouse);
+      scheduleRender();
+    };
     const onPointerDown = (event: PointerEvent) => {
+      if (reducedMotion) return;
+      updatePointer(event, mouse);
       updatePointer(event, clickOrigin);
       clickedAt = performance.now() / 1000;
+      scheduleRender();
+    };
+    const onPointerLeave = () => {
+      mouse.set(-10_000, -10_000);
+      scheduleRender();
+    };
+    const onMotionPreferenceChange = () => {
+      reducedMotion = motionPreference.matches;
+      if (reducedMotion) {
+        clickedAt = -10;
+        mouse.set(-10_000, -10_000);
+      }
+      scheduleRender();
+    };
+    const onVisibilityChange = () => {
+      if (document.hidden && frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      } else {
+        scheduleRender();
+      }
     };
 
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     window.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("blur", onPointerLeave);
+    document.addEventListener("pointerleave", onPointerLeave);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    motionPreference.addEventListener("change", onMotionPreferenceChange);
     resize();
 
-    let frame = 0;
-    const render = () => {
-      program.uniforms.uClickTime.value = performance.now() / 1000 - clickedAt;
-      renderer.render({ scene: mesh });
-      frame = requestAnimationFrame(render);
-    };
-    frame = requestAnimationFrame(render);
-
     return () => {
-      cancelAnimationFrame(frame);
+      if (frame) cancelAnimationFrame(frame);
       resizeObserver.disconnect();
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("blur", onPointerLeave);
+      document.removeEventListener("pointerleave", onPointerLeave);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      motionPreference.removeEventListener("change", onMotionPreferenceChange);
       container.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [activeColor, baseColor, darkBaseColor, dotSize, gap, proximity, resolvedTheme]);
+  }, [
+    activeColor,
+    baseColor,
+    darkBaseColor,
+    dotSize,
+    gap,
+    proximity,
+    resolvedTheme,
+  ]);
 
-  return <div ref={containerRef} className="h-full w-full" aria-hidden="true" />;
+  return (
+    <div ref={containerRef} className="h-full w-full" aria-hidden="true" />
+  );
 }
