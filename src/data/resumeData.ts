@@ -279,7 +279,7 @@ export const resumeData = {
       ],
       technologies: ["ReactJS", "MYDS", "Fastify", "Payload CMS"],
       github: "https://github.com/govtechmy/sekolahku-fe",
-      liveUrl: "https://sekolahku.digital.gov.my",
+      liveUrl: "https://sekolahku.moe.gov.my",
     },
     {
       title: "MyFaSA",
