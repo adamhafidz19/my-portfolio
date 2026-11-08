@@ -200,19 +200,18 @@ export function Contact({ dictionary }: { dictionary: Dictionary }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-modal-title"
-            className={`glass-card gradient-border relative my-auto w-full max-w-lg overflow-hidden rounded-[1.75rem] p-5 text-zinc-950 sm:p-8 dark:text-white ${
+            className={`glass-card gradient-border relative isolate my-auto w-full max-w-lg overflow-clip rounded-[1.75rem] p-5 text-zinc-950 sm:p-8 dark:text-white ${
               isClosing ? "animate-contact-card-out" : "animate-contact-card-in"
             }`}
           >
-            {/* Card glow */}
+            {/* Card glow — clipped on its own so WebKit respects the rounded border */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-24 size-64 rounded-full bg-primary-500/20 blur-3xl dark:bg-primary-500/15"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -bottom-24 left-10 size-56 rounded-full bg-pink-400/15 blur-3xl dark:bg-pink-500/10"
-            />
+              className="pointer-events-none absolute inset-0 isolate overflow-clip rounded-[inherit]"
+            >
+              <div className="absolute -right-20 -top-24 size-64 rounded-full bg-primary-500/20 blur-3xl dark:bg-primary-500/15" />
+              <div className="absolute -bottom-24 left-10 size-56 rounded-full bg-pink-400/15 blur-3xl dark:bg-pink-500/10" />
+            </div>
 
             <button
               type="button"
